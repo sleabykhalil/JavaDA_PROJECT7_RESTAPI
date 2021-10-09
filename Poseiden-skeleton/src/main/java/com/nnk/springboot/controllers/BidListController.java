@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.services.BidListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,16 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
 public class BidListController {
     // TODO: Inject Bid service
+    @Autowired
+    BidListService bidListService;
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         // TODO: call service find all bids to show to the view
+        List<BidList> bidLists=bidListService.findAllBids();
+        model.addAttribute("bidLists",bidLists);
         return "bidList/list";
     }
 
@@ -42,7 +48,7 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
+                            BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Bid and return list Bid
         return "redirect:/bidList/list";
     }
