@@ -4,10 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class MyUser {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "Id")
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;

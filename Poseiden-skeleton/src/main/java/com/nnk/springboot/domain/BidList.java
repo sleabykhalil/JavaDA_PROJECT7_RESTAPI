@@ -9,14 +9,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "bidlist")
+@Table(name = "BidList")
 public class BidList {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
     Integer bidListId;
+    @NotBlank(message = "Account is mandatory")
     String account;
+    @NotBlank(message = "Type is mandatory")
     String type;
     Double bidQuantity;
     Double askQuantity;
