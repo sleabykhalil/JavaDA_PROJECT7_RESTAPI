@@ -1,14 +1,21 @@
 package com.nnk.springboot.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "BidList")
 public class BidList {
     @Id
