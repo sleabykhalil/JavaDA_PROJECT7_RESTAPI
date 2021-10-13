@@ -34,7 +34,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                //.antMatchers("/admin/**").hasRole("ADMIN")
+                //.antMatchers("/").anonymous()
+                .antMatchers("/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                //.loginPage("/login").permitAll()
+                .defaultSuccessUrl("/")
+                .and()
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .and()
+                .rememberMe();
+       /* http.authorizeRequests()
                 .antMatchers("/bidList/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/curvePoint/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/rating/**").hasAnyAuthority("USER", "ADMIN")
@@ -42,27 +59,29 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/trade/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/home").permitAll()
+                //.antMatchers("/**","/home**").anonymous()
+                .antMatchers("/home","/").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated().and().httpBasic()
+                .anyRequest().authenticated()
+                //.antMatchers("/login").permitAll()
+                //.antMatchers("/","/home**").anonymous()
+                .and().httpBasic()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/transfer")
+                .formLogin()
+                //.loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password")
+                //.defaultSuccessUrl("/")
                 .and()
                 .csrf().disable()
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .and()
-                .rememberMe();
-//        http.authorizeRequests()
+                .rememberMe();*/
+/*       http.authorizeRequests()
 //                .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
@@ -72,7 +91,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .authorizeRequests().antMatchers("/console/**").permitAll();
 //        http.csrf().disable();
 //        http.headers().frameOptions().disable();
-
+*/
     }
 
 
