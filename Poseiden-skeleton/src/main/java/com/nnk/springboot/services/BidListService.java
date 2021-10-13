@@ -8,4 +8,12 @@ import java.util.List;
 @Service
 public interface BidListService {
     List<BidList> findAllBids();
+
+    BidList add(BidList bidList);
+
+    BidList update(Integer bidListId,BidList bidList);
+
+    BidList findBidListById(Integer bidListId);
+
+    void delete(BidList bidListToDelete);
 }
