@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 
 @Configuration
@@ -35,11 +37,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+//                .maximumSessions(2)
+////                .expiredUrl("/sessionExpired.html").and()
+////                .invalidSessionUrl("/invalidSession.html")
+//        ;
+
         http
                 .csrf().disable()
                 .authorizeRequests()
                 //.antMatchers("/admin/**").hasRole("ADMIN")
                 //.antMatchers("/").anonymous()
+                .antMatchers("/user/**").hasAuthority("USER")
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -98,5 +108,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 }
