@@ -62,7 +62,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe();
-//        http.authorizeRequests()
+/*        http.authorizeRequests()
 //                .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
@@ -72,7 +72,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .authorizeRequests().antMatchers("/console/**").permitAll();
 //        http.csrf().disable();
 //        http.headers().frameOptions().disable();
-
+*/
     }
 
 

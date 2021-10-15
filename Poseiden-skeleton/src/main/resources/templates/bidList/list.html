@@ -44,7 +44,8 @@
 					<td th:text="${bidListDto.account}">Account Name</td>
 					<td th:text="${bidListDto.type}">Account Type</td>
 					<td th:text="${bidListDto.bidQuantity}">Bid Quantity</td>
-					<td><a href="#"  role="button">Edit</a> | <a href="#"  role="button">Delete</a></td>
+					<td><a href="@{/bidList/update/{id}(id=${bidListDto.id}})}"  role="button">Edit</a> |
+						<a href="@{/bidList/delete/{id}(id=${bidListDto.id}})}"  role="button">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
