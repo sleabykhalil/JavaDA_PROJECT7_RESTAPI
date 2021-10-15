@@ -26,6 +26,7 @@ public class BidList {
     String account;
     @NotBlank(message = "Type is mandatory")
     String type;
+    @NotBlank(message = "Quantity is mandatory")
     Double bidQuantity;
     Double askQuantity;
     Double bid;
