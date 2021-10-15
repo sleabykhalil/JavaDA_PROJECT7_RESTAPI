@@ -35,6 +35,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/loginpage").permitAll()
+                .antMatchers("/homepage").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/loginpage")
+                .defaultSuccessUrl("/homepage")
+                .permitAll()
+                .and()
+                .csrf().disable()
+                .logout()
+                .deleteCookies("JSESSIONID")
+        ;
+
+       /* http.authorizeRequests()
                 .antMatchers("/bidList/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/curvePoint/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/rating/**").hasAnyAuthority("USER", "ADMIN")
@@ -61,7 +77,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .and()
-                .rememberMe();
+                .rememberMe();*/
+
 /*        http.authorizeRequests()
 //                .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
 //                .anyRequest().authenticated()
