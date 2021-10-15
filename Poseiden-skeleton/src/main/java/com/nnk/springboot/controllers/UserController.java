@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.MyUser;
-import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.repositories.MyUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private MyUserRepository userRepository;
 
     @RequestMapping("/user/list")
     public String home(Model model)
