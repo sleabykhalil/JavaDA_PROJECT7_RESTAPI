@@ -13,4 +13,6 @@ public interface RatingService {
     Rating findById(Integer id);
 
     Rating update(Rating rating);
+
+    void delete(Integer id);
 }

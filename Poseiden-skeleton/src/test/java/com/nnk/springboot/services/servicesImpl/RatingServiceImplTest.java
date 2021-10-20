@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class RatingServiceImplTest {
@@ -85,5 +86,17 @@ class RatingServiceImplTest {
         Rating result = ratingServiceUnderTest.update(rating);
         //then
         assertThat(result.getId()).isEqualTo(rating.getId());
+    }
+
+    @Test
+    void delete() {
+        Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+        rating.setId(1);
+        when(ratingRepositoryMock.findById(1)).thenReturn(Optional.of(rating));
+        doNothing().when(ratingRepositoryMock).deleteById(1);
+        //when
+        ratingServiceUnderTest.delete(1);
+        //then
+        verify(ratingRepositoryMock, times(1)).deleteById(1);
     }
 }

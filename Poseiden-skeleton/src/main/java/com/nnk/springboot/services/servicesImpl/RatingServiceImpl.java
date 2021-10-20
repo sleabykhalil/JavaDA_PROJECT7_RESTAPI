@@ -65,5 +65,13 @@ public class RatingServiceImpl implements RatingService {
         return ratingAfterUpdate;
     }
 
-
+    @Override
+    public void delete(Integer id) {
+        if (ratingRepository.findById(id).isPresent()) {
+            ratingRepository.deleteById(id);
+            log.debug("rating deleted id=[{}]", id);
+        } else {
+            log.debug("rating not found =[{}]", id);
+        }
+    }
 }

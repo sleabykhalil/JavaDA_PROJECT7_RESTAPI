@@ -23,14 +23,16 @@
             <div class="form-group row ">
                 <label for="moodysRating" class="col-sm-2 col-form-label">MoodysRating </label>
                 <div class="col-sm-4">
-                    <input th:field="*{moodysRating}" id="moodysRating" type="text" class="form-control" placeholder="moodysRating">
+                    <input th:field="*{moodysRating}" id="moodysRating" type="text" class="form-control"
+                           placeholder="moodysRating">
                     <p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></p>
                 </div>
             </div>
             <div class="form-group row ">
                 <label for="sandPRating" class="col-sm-2 col-form-label">SandPRating </label>
                 <div class="col-sm-4">
-                    <input th:field="*{sandPRating}" id="sandPRating" type="text" class="form-control" placeholder="SandPRating">
+                    <input th:field="*{sandPRating}" id="sandPRating" type="text" class="form-control"
+                           placeholder="SandPRating">
                     <p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></p>
                 </div>
             </div>

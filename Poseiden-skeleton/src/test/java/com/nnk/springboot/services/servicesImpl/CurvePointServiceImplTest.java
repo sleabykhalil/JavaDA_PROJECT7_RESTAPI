@@ -90,6 +90,9 @@ class CurvePointServiceImplTest {
     @Test
     void delete() {
         //given
+        CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
+        curvePoint.setId(1);
+        when(curvePointRepositoryMock.findById(1)).thenReturn(Optional.of(curvePoint));
         doNothing().when(curvePointRepositoryMock).deleteById(1);
         //when
         curvePointServiceUnderTest.delete(1);
