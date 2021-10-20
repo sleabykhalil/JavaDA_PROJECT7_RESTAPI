@@ -24,21 +24,21 @@
 			<div class="form-group row ">
 				<label for="curveId" class="col-sm-2 col-form-label">Curve Id </label>
 				<div class="col-sm-4">
-					<input th:field="*{curveId}" id="curveId" type="text" class="form-control" placeholder="curve Id">
+					<input th:field="*{curveId}" id="curveId" type="number" class="form-control" placeholder="curve Id">
 					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></p>
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="term" class="col-sm-2 col-form-label">term </label>
 				<div class="col-sm-4">
-					<input th:field="*{term}" id="term" type="text" class="form-control" placeholder="term">
+					<input th:field="*{term}" id="term" type="number" class="form-control" placeholder="term">
 					<p class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></p>
 				</div>
 			</div>
 			<div class="form-group row ">
 				<label for="value" class="col-sm-2 col-form-label">value</label>
 				<div class="col-sm-4">
-					<input th:field="*{value}" id="value" type="text" class="form-control"
+					<input th:field="*{value}" id="value" type="number" class="form-control"
 						   placeholder="value">
 					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
 				</div>

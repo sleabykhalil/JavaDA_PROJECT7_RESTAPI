@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+
 
 @Entity
 @AllArgsConstructor
@@ -19,9 +19,13 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     Integer id;
+    @NotBlank(message = "moodysRating is mandatory")
     String moodysRating;
+    @NotBlank(message = "sandPRating is mandatory")
     String sandPRating;
+    @NotBlank(message = "fitchRating is mandatory")
     String fitchRating;
+    @NotNull(message = "orderNumber is mandatory")
     Integer orderNumber;
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {

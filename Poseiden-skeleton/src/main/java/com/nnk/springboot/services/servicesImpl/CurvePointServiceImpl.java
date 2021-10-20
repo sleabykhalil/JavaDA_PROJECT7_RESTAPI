@@ -53,7 +53,7 @@ public class CurvePointServiceImpl implements CurvePointService {
     }
 
     /**
-     * update curve point by id
+     * update curve point
      *
      * @param curvePoint
      * @return
@@ -73,7 +73,11 @@ public class CurvePointServiceImpl implements CurvePointService {
      */
     @Override
     public void delete(Integer id) {
-        curvePointRepository.deleteById(id);
-        log.debug("curve point deleted id=[{}]", id);
+        if (curvePointRepository.findById(id).isPresent()) {
+            curvePointRepository.deleteById(id);
+            log.debug("curve point deleted id=[{}]", id);
+        } else {
+            log.debug("curve point not found =[{}]", id);
+        }
     }
 }
