@@ -48,31 +48,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/app/login").permitAll()
                 .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated().and().httpBasic()
+                .antMatchers("/app/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .anyRequest().authenticated()//.and().httpBasic()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/app/login").permitAll()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/transfer")
+                .defaultSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedPage("/app/error")
                 .and()
                 .csrf().disable()
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe();
-/*        http.authorizeRequests()
-//                .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic();
 
-//        http.authorizeRequests().antMatchers("/").permitAll().and()
-//                    .authorizeRequests().antMatchers("/console/**").permitAll();
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
-*/
     }
 
 
