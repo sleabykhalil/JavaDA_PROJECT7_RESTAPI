@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -36,16 +33,18 @@ public class CurveController {
         return "curvePoint/add";
     }
 
-    @PostMapping("/curvePoint/validate")
+    @PostMapping(value = "/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         // done TO DO: check data valid and save to db, after saving return Curve list
+
         if (!result.hasErrors()) {
             curvePointService.add(curvePoint);
             log.info("CurvePoint added Curve id=[{}]", curvePoint.getCurveId());
         } else {
             log.error("CurvePoint can not be added id=[{}]", curvePoint.getCurveId());
         }
-        return "curvePoint/add";
+
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
