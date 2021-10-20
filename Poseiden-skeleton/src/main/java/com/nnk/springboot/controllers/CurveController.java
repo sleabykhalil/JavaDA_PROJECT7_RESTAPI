@@ -43,13 +43,12 @@ public class CurveController {
         } else {
             log.error("CurvePoint can not be added id=[{}]", curvePoint.getCurveId());
         }
-
         return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
+        // TO DO: get CurvePoint by Id and to model then show to the form
         CurvePoint curvePoint = curvePointService.findById(id);
         model.addAttribute("curvePoint", curvePoint);
         return "curvePoint/update";

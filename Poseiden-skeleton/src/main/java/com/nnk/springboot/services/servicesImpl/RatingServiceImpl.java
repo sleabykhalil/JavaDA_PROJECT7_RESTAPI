@@ -21,5 +21,15 @@ public class RatingServiceImpl implements RatingService {
         return ratingRepository.findAll();
     }
 
+    /**
+     * Add rating
+     * @param rating
+     * @return
+     */
+    @Override
+    public Rating add(Rating rating) {
+        return  ratingRepository.save(rating);
+    }
+
 
 }

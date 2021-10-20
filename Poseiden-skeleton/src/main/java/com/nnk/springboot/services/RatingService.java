@@ -7,4 +7,6 @@ import java.util.List;
 @Service
 public interface RatingService {
     List<Rating> findAllRating();
+
+    Rating add(Rating rating);
 }

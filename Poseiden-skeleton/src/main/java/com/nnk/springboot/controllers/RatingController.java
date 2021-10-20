@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@Slf4j
 @Controller
 public class RatingController {
     // TO DO: Inject Rating service
@@ -35,8 +36,14 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        return "rating/add";
+        // TO DO: check data valid and save to db, after saving return Rating list
+        if (!result.hasErrors()) {
+            ratingService.add(rating);
+            log.info("Rating added  id=[{}]", rating.getId());
+        } else {
+            log.error("Rating can not be added id=[{}]", rating.getId());
+        }
+        return  "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
