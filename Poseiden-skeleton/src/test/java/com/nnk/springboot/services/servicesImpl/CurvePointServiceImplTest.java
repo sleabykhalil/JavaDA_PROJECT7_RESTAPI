@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,7 +48,7 @@ class CurvePointServiceImplTest {
         CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
         when(curvePointRepositoryMock.save(curvePoint)).thenReturn(curvePoint);
         //when
-        CurvePoint result=curvePointServiceUnderTest.add(curvePoint);
+        CurvePoint result = curvePointServiceUnderTest.add(curvePoint);
         //then
         assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
     }
@@ -61,16 +60,17 @@ class CurvePointServiceImplTest {
         curvePoint.setId(1);
         when(curvePointRepositoryMock.findById(1)).thenReturn(Optional.of(curvePoint));
         //when
-        CurvePoint result=curvePointServiceUnderTest.findById(1);
+        CurvePoint result = curvePointServiceUnderTest.findById(1);
         //then
         assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
     }
+
     @Test
     void findById_whenNotFound_ReturnNull() {
         //given
         when(curvePointRepositoryMock.findById(1)).thenReturn(Optional.empty());
         //when
-        CurvePoint result=curvePointServiceUnderTest.findById(1);
+        CurvePoint result = curvePointServiceUnderTest.findById(1);
         //then
         assertThat(result).isNull();
     }
@@ -82,7 +82,7 @@ class CurvePointServiceImplTest {
         curvePoint.setId(1);
         when(curvePointRepositoryMock.save(curvePoint)).thenReturn(curvePoint);
         //when
-        CurvePoint result=curvePointServiceUnderTest.update(curvePoint);
+        CurvePoint result = curvePointServiceUnderTest.update(curvePoint);
         //then
         assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
     }
@@ -94,6 +94,6 @@ class CurvePointServiceImplTest {
         //when
         curvePointServiceUnderTest.delete(1);
         //then
-        verify(curvePointRepositoryMock,times(1)).deleteById(1);
+        verify(curvePointRepositoryMock, times(1)).deleteById(1);
     }
 }

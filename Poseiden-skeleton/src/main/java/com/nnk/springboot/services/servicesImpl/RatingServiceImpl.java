@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @AllArgsConstructor
 @Service
@@ -23,12 +25,44 @@ public class RatingServiceImpl implements RatingService {
 
     /**
      * Add rating
+     *
      * @param rating
      * @return
      */
     @Override
     public Rating add(Rating rating) {
-        return  ratingRepository.save(rating);
+        return ratingRepository.save(rating);
+    }
+
+    /**
+     * find Rating by id
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Rating findById(Integer id) {
+        Optional<Rating> rating = ratingRepository.findById(id);
+        if (rating.isPresent()) {
+            log.debug("Rating found id=[{}]", id);
+            return rating.get();
+        } else {
+            log.debug("Rating can not found id=[{}]", id);
+            return null;
+        }
+    }
+
+    /**
+     * Update Rating
+     *
+     * @param rating
+     * @return
+     */
+    @Override
+    public Rating update(Rating rating) {
+        Rating ratingAfterUpdate = ratingRepository.save(rating);
+        log.debug("Rating updated id=[{}]", ratingAfterUpdate.getId());
+        return ratingAfterUpdate;
     }
 
 

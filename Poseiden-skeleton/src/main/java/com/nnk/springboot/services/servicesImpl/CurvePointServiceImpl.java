@@ -53,7 +53,7 @@ public class CurvePointServiceImpl implements CurvePointService {
     }
 
     /**
-     * update curve point by id
+     * update curve point
      *
      * @param curvePoint
      * @return

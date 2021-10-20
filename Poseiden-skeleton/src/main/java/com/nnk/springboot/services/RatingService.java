@@ -9,4 +9,8 @@ public interface RatingService {
     List<Rating> findAllRating();
 
     Rating add(Rating rating);
+
+    Rating findById(Integer id);
+
+    Rating update(Rating rating);
 }
