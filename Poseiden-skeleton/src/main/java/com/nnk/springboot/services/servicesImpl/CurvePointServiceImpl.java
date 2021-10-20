@@ -52,10 +52,28 @@ public class CurvePointServiceImpl implements CurvePointService {
         }
     }
 
+    /**
+     * update curve point by id
+     *
+     * @param curvePoint
+     * @return
+     */
     @Override
     public CurvePoint update(CurvePoint curvePoint) {
         CurvePoint curvePointAfterUpdate = curvePointRepository.save(curvePoint);
         log.debug("Curve Point updated id=[{}]", curvePointAfterUpdate.getCurveId());
         return curvePointAfterUpdate;
+    }
+
+    /**
+     * delete curve point by id
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public void delete(Integer id) {
+        curvePointRepository.deleteById(id);
+        log.debug("curve point deleted id=[{}]", id);
     }
 }

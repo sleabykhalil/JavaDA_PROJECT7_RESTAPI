@@ -15,4 +15,5 @@ public interface CurvePointService {
 
     CurvePoint update(CurvePoint curvePoint);
 
+    void delete(Integer id);
 }

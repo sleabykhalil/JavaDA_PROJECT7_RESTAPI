@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CurvePointServiceImplTest {
@@ -85,5 +85,15 @@ class CurvePointServiceImplTest {
         CurvePoint result=curvePointServiceUnderTest.update(curvePoint);
         //then
         assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
+    }
+
+    @Test
+    void delete() {
+        //given
+        doNothing().when(curvePointRepositoryMock).deleteById(1);
+        //when
+        curvePointServiceUnderTest.delete(1);
+        //then
+        verify(curvePointRepositoryMock,times(1)).deleteById(1);
     }
 }
