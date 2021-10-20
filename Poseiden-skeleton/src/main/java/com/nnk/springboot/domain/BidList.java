@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -26,7 +27,7 @@ public class BidList {
     String account;
     @NotBlank(message = "Type is mandatory")
     String type;
-    @NotBlank(message = "Quantity is mandatory")
+    @NotNull(message = "Quantity is mandatory")
     Double bidQuantity;
     Double askQuantity;
     Double bid;
