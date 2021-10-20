@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Table(name = "BidList")
-public class BidList {
+public class BidList { //fixme ask Mandfred if i had to change name to Bid
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")

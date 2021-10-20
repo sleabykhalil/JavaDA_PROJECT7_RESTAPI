@@ -49,7 +49,7 @@ public class BidListController {
         } else {
             log.error("bid can not be added id=[{}]", bid.getBidListId());
         }
-        return "bidList/add";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
