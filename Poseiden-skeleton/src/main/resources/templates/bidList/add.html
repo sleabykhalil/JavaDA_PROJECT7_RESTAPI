@@ -35,7 +35,7 @@
             <div class="form-group row ">
                 <label for="bidQuantity" class="col-sm-2 col-form-label">Bid quantity </label>
                 <div class="col-sm-4">
-                    <input th:field="*{bidQuantity}" id="bidQuantity" type="text" class="form-control"
+                    <input th:field="*{bidQuantity}" id="bidQuantity" type="number" class="form-control"
                            placeholder="Bid quantity">
                     <p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}"></p>
                 </div>
