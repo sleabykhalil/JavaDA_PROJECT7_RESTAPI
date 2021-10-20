@@ -23,16 +23,19 @@ public class CurvePoint {
     @Column(name = "Id")
     Integer id;
     @Column(name = "CurveId")
+    @NotNull(message = "Id can not be empty")
     Integer curveId;
     Timestamp asOfDate;
+    @NotNull(message = "term can not be empty")
     Double term;
+    @NotNull(message = "value can not be empty")
     Double value;
     Timestamp creationDate;
 
     public CurvePoint(Integer curveId, double term, double value) {
-        this.curveId=curveId;
-        this.term=term;
-        this.value=value;
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
 
     }
 

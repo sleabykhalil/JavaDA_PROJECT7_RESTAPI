@@ -40,39 +40,35 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rating/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/ruleName/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/trade/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/user/update").hasAnyAuthority( "USER","ADMIN")
+                .antMatchers("/user/list").hasAnyAuthority( "USER","ADMIN")//fixme remove user
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/home").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/app/login").permitAll()
                 .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated().and().httpBasic()
+                .antMatchers("/app/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/","/home").anonymous()
+                .antMatchers("/","/home").permitAll()
+                .anyRequest().authenticated()//.and().httpBasic()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/app/login").permitAll()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/transfer")
+                .defaultSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedPage("/app/error")
                 .and()
                 .csrf().disable()
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe();
-/*        http.authorizeRequests()
-//                .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic();
 
-//        http.authorizeRequests().antMatchers("/").permitAll().and()
-//                    .authorizeRequests().antMatchers("/console/**").permitAll();
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
-*/
+
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Controller
@@ -19,9 +20,9 @@ public class UserController {
     @Autowired
     private MyUserRepository userRepository;
 
+    @RolesAllowed("ADMIN")
     @RequestMapping("/user/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         model.addAttribute("users", userRepository.findAll());
         return "user/list";
     }
@@ -36,7 +37,7 @@ public class UserController {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
+            userRepository.save(user);//fixme use service insteadof repository
             model.addAttribute("users", userRepository.findAll());
             return "redirect:/user/list";
         }
