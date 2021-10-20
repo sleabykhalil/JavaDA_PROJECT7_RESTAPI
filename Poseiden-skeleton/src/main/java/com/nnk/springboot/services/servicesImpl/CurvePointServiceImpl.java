@@ -21,4 +21,14 @@ public class CurvePointServiceImpl implements CurvePointService {
     public List<CurvePoint> findAllCurvePoint() {
         return curvePointRepository.findAll();
     }
+
+    /**
+     * add new Curve Point
+     * @param curvePoint
+     * @return
+     */
+    @Override
+    public CurvePoint add(CurvePoint curvePoint) {
+        return curvePointRepository.save(curvePoint);
+    }
 }

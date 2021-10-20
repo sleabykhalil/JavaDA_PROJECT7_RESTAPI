@@ -42,4 +42,14 @@ class CurvePointServiceImplTest {
     }
 
 
+    @Test
+    void add() {
+        //given
+        CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
+        when(curvePointRepositoryMock.save(curvePoint)).thenReturn(curvePoint);
+        //when
+        CurvePoint result=curvePointServiceUnderTest.add(curvePoint);
+        //then
+        assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
+    }
 }
