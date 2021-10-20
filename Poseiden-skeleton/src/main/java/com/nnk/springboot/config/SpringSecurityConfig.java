@@ -66,11 +66,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe();
 
-//        http.authorizeRequests().antMatchers("/").permitAll().and()
-//                    .authorizeRequests().antMatchers("/console/**").permitAll();
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
-*/
+
     }
 
 

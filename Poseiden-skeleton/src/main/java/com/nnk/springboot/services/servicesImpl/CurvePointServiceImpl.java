@@ -19,6 +19,6 @@ public class CurvePointServiceImpl implements CurvePointService {
 
     @Override
     public List<CurvePoint> findAllCurvePoint() {
-        return null;
+        return curvePointRepository.findAll();
     }
 }
