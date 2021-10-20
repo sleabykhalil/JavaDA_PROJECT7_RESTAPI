@@ -25,7 +25,7 @@ public class CurveController {
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        // done TODO: find all Curve Point, add to model
+        // done TO DO: find all Curve Point, add to model
         List<CurvePoint> curvePointList = curvePointService.findAllCurvePoint();
         model.addAttribute("curvePointList", curvePointList);
         return "curvePoint/list";
@@ -38,7 +38,7 @@ public class CurveController {
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // done TODO: check data valid and save to db, after saving return Curve list
+        // done TO DO: check data valid and save to db, after saving return Curve list
         if (!result.hasErrors()) {
             curvePointService.add(curvePoint);
             log.info("CurvePoint added Curve id=[{}]", curvePoint.getCurveId());
@@ -51,6 +51,8 @@ public class CurveController {
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get CurvePoint by Id and to model then show to the form
+        CurvePoint curvePoint=curvePointService.findById(id);
+        model.addAttribute("curvePoint",curvePoint);
         return "curvePoint/update";
     }
 
@@ -58,6 +60,12 @@ public class CurveController {
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                             BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
+        if (!result.hasErrors()) {
+            curvePointService.update(curvePoint);
+            log.info("CurvePoint updated Curve id=[{}]", id);
+        } else {
+            log.error("CurvePoint can not be update id=[{}]", id);
+        }
         return "redirect:/curvePoint/list";
     }
 

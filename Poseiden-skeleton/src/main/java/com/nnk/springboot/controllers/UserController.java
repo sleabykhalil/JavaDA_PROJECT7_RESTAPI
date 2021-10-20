@@ -37,7 +37,7 @@ public class UserController {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
+            userRepository.save(user);//fixme use service insteadof repository
             model.addAttribute("users", userRepository.findAll());
             return "redirect:/user/list";
         }

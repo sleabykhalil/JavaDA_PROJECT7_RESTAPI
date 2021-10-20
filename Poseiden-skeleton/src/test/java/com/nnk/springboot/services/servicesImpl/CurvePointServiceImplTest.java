@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,6 +50,39 @@ class CurvePointServiceImplTest {
         when(curvePointRepositoryMock.save(curvePoint)).thenReturn(curvePoint);
         //when
         CurvePoint result=curvePointServiceUnderTest.add(curvePoint);
+        //then
+        assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
+    }
+
+    @Test
+    void findById_whenFound_ReturnCurvePoint() {
+        //given
+        CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
+        curvePoint.setId(1);
+        when(curvePointRepositoryMock.findById(1)).thenReturn(Optional.of(curvePoint));
+        //when
+        CurvePoint result=curvePointServiceUnderTest.findById(1);
+        //then
+        assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
+    }
+    @Test
+    void findById_whenNotFound_ReturnNull() {
+        //given
+        when(curvePointRepositoryMock.findById(1)).thenReturn(Optional.empty());
+        //when
+        CurvePoint result=curvePointServiceUnderTest.findById(1);
+        //then
+        assertThat(result).isNull();
+    }
+
+    @Test
+    void update() {
+        //given
+        CurvePoint curvePoint = new CurvePoint(10, 10d, 10d);
+        curvePoint.setId(1);
+        when(curvePointRepositoryMock.save(curvePoint)).thenReturn(curvePoint);
+        //when
+        CurvePoint result=curvePointServiceUnderTest.update(curvePoint);
         //then
         assertThat(result.getCurveId()).isEqualTo(curvePoint.getCurveId());
     }

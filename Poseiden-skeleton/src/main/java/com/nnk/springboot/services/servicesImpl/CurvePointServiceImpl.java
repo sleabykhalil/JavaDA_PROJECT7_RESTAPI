@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
@@ -24,11 +25,37 @@ public class CurvePointServiceImpl implements CurvePointService {
 
     /**
      * add new Curve Point
+     *
      * @param curvePoint
      * @return
      */
     @Override
     public CurvePoint add(CurvePoint curvePoint) {
         return curvePointRepository.save(curvePoint);
+    }
+
+    /**
+     * find CurvePoint by Id
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public CurvePoint findById(Integer id) {
+        Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
+        if (curvePoint.isPresent()) {
+            log.debug("Curve Point found id=[{}]", id);
+            return curvePoint.get();
+        } else {
+            log.debug("Curve Point can not found id=[{}]", id);
+            return null;
+        }
+    }
+
+    @Override
+    public CurvePoint update(CurvePoint curvePoint) {
+        CurvePoint curvePointAfterUpdate = curvePointRepository.save(curvePoint);
+        log.debug("Curve Point updated id=[{}]", curvePointAfterUpdate.getCurveId());
+        return curvePointAfterUpdate;
     }
 }

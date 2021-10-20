@@ -10,4 +10,9 @@ public interface CurvePointService {
     List<CurvePoint> findAllCurvePoint();
 
     CurvePoint add(CurvePoint curvePoint);
+
+    CurvePoint findById(Integer id);
+
+    CurvePoint update(CurvePoint curvePoint);
+
 }
