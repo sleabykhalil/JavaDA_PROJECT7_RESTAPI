@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.services.RuleNameService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class RuleNameController {
-    // TODO: Inject RuleName service
+    // TO DO: Inject RuleName service
+    @Autowired
+    RuleNameService ruleNameService;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
+    public String home(Model model) {
+        // TO DO: find all RuleName, add to model
+        List<RuleName> ruleNameList = ruleNameService.findAllRuleName();
+        model.addAttribute("ruleNameList", ruleNameList);
         return "ruleName/list";
     }
 
@@ -41,7 +47,7 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                             BindingResult result, Model model) {
+                                 BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         return "redirect:/ruleName/list";
     }
