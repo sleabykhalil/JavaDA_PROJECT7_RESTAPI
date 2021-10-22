@@ -49,14 +49,22 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+        // TO DO: get RuleName by Id and to model then show to the form
+        RuleName ruleName = ruleNameService.findById(id);
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+        // TO DO: check required fields, if valid call service to update RuleName and return RuleName list
+        if (!result.hasErrors()) {
+            ruleNameService.update(ruleName);
+            log.info("CurvePoint updated Curve id=[{}]", id);
+        } else {
+            log.error("CurvePoint can not be update id=[{}]", id);
+        }
         return "redirect:/ruleName/list";
     }
 

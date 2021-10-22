@@ -10,4 +10,8 @@ public interface RuleNameService {
     List<RuleName> findAllRuleName();
 
     RuleName add(RuleName ruleName);
+
+    RuleName findById(Integer id);
+
+    RuleName update(RuleName ruleName);
 }

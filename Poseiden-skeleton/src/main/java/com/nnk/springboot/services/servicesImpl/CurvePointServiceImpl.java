@@ -31,7 +31,9 @@ public class CurvePointServiceImpl implements CurvePointService {
      */
     @Override
     public CurvePoint add(CurvePoint curvePoint) {
-        return curvePointRepository.save(curvePoint);
+        CurvePoint curvePointToAdd = curvePointRepository.save(curvePoint);
+        log.debug("curve point added id=[{}] ", curvePoint.getId());
+        return curvePointToAdd;
     }
 
     /**
