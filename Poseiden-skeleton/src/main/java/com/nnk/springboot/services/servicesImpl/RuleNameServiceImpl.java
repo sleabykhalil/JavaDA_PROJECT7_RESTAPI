@@ -46,4 +46,14 @@ public class RuleNameServiceImpl implements RuleNameService {
         log.debug("Curve Point updated id=[{}]", ruleName.getId());
         return ruleNameToUpdate;
     }
+
+    @Override
+    public void delete(Integer id) {
+        if (ruleNameRepository.findById(id).isPresent()) {
+            ruleNameRepository.deleteById(id);
+            log.debug("Rule deleted id=[{}]", id);
+        } else {
+            log.debug("Rule not found =[{}]", id);
+        }
+    }
 }

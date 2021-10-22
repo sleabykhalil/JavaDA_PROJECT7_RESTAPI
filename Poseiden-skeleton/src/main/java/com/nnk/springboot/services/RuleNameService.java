@@ -14,4 +14,6 @@ public interface RuleNameService {
     RuleName findById(Integer id);
 
     RuleName update(RuleName ruleName);
+
+    void delete(Integer id);
 }

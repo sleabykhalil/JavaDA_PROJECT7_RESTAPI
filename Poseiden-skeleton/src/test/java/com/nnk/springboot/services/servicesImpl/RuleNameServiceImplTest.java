@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RuleNameServiceImplTest {
@@ -84,5 +84,18 @@ class RuleNameServiceImplTest {
         RuleName result = ruleNameServiceUnderTest.update(ruleName);
         //then
         assertThat(result.getId()).isEqualTo(ruleName.getId());
+    }
+
+    @Test
+    void delete() {
+        //given
+        RuleName ruleName = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        ruleName.setId(1);
+        when(ruleNameRepositoryMock.findById(1)).thenReturn(Optional.of(ruleName));
+        doNothing().when(ruleNameRepositoryMock).deleteById(1);
+        //when
+        ruleNameServiceUnderTest.delete(1);
+        //then
+        verify(ruleNameRepositoryMock, times(1)).deleteById(1);
     }
 }
