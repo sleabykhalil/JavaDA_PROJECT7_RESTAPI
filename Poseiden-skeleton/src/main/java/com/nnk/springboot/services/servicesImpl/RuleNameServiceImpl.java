@@ -21,4 +21,9 @@ public class RuleNameServiceImpl implements RuleNameService {
     public List<RuleName> findAllRuleName() {
         return ruleNameRepository.findAll();
     }
+
+    @Override
+    public RuleName add(RuleName ruleName) {
+        return ruleNameRepository.save(ruleName);
+    }
 }

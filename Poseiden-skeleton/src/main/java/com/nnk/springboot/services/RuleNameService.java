@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface RuleNameService {
     List<RuleName> findAllRuleName();
+
+    RuleName add(RuleName ruleName);
 }

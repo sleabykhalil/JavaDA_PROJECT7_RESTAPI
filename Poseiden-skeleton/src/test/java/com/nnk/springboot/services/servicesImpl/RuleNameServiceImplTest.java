@@ -39,4 +39,15 @@ class RuleNameServiceImplTest {
         //then
         assertThat(result.size()).isGreaterThan(0);
     }
+
+    @Test
+    void add() {
+        //given
+        RuleName ruleName = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
+        when(ruleNameRepositoryMock.save(ruleName)).thenReturn(ruleName);
+        //when
+        RuleName result = ruleNameServiceUnderTest.add(ruleName);
+        //then
+        assertThat(result.getName()).isEqualTo(result.getName());
+    }
 }
