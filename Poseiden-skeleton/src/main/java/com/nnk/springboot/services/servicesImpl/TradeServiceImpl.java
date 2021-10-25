@@ -1,6 +1,5 @@
 package com.nnk.springboot.services.servicesImpl;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.services.TradeService;
@@ -39,7 +38,6 @@ public class TradeServiceImpl implements TradeService {
             log.debug("Trade not found =[{}]", tradeId);
             return null;
         }
-
     }
 
     @Override
@@ -47,6 +45,16 @@ public class TradeServiceImpl implements TradeService {
         Trade tradeAfterUpdate = tradeRepository.save(trade);
         log.debug("Trade updated id=[{}]", tradeAfterUpdate.getTradeId());
         return tradeAfterUpdate;
+    }
+
+    @Override
+    public void delete(Integer tradeId) {
+        if (tradeRepository.findById(tradeId).isPresent()) {
+            tradeRepository.deleteById(tradeId);
+            log.debug("trade deleted id=[{}]", tradeId);
+        } else {
+            log.debug("trade not found =[{}]", tradeId);
+        }
     }
 
 }

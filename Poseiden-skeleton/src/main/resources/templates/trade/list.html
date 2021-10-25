@@ -46,10 +46,9 @@
 				<td th:text="${trade.buyQuantity}">Value</td>
 
 
-				<td><a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}" role="button">Edit</a> |
-					<a th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}" role="button">Delete</a></td>
+				<td><a th:href="@{/trade/update/{id}(id=${trade.id})}" role="button">Edit</a> |
+					<a th:href="@{/trade/delete/{id}(id=${trade.id})}" role="button">Delete</a></td>
 			</tr>
-
 			</tbody>
 		</table>
 	</div>

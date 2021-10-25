@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TradeServiceImplTest {
@@ -84,5 +84,18 @@ class TradeServiceImplTest {
         Trade result = tradeServiceUnderTest.update(trade);
         //then
         assertThat(result.getTradeId()).isEqualTo(trade.getTradeId());
+    }
+
+    @Test
+    void delete() {
+        //given
+        Trade trade = new Trade("Trade Account", "Type");
+        trade.setTradeId(1);
+        when(tradeRepositoryMock.findById(trade.getTradeId())).thenReturn(Optional.of(trade));
+        doNothing().when(tradeRepositoryMock).deleteById(1);
+        //when
+        tradeServiceUnderTest.delete(1);
+        //then
+        verify(tradeRepositoryMock, times(1)).deleteById(1);
     }
 }
