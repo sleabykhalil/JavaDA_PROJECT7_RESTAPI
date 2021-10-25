@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.services.TradeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+    // TO DO: Inject Trade service
+    @Autowired
+    TradeService tradeService;
+
 
     @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
+    public String home(Model model) {
+        // TO DO: find all Trade, add to model
+        List<Trade> tradeList = new ArrayList<>();
+        tradeList = tradeService.findAll();
+        model.addAttribute("tradeList", tradeList);
         return "trade/list";
     }
 
@@ -41,7 +50,7 @@ public class TradeController {
 
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
-                             BindingResult result, Model model) {
+                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
         return "redirect:/trade/list";
     }
