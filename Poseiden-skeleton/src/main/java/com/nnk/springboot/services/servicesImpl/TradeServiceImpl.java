@@ -21,4 +21,9 @@ public class TradeServiceImpl implements TradeService {
     public List<Trade> findAll() {
         return tradeRepository.findAll();
     }
+
+    @Override
+    public Trade add(Trade trade) {
+        return tradeRepository.save(trade);
+    }
 }

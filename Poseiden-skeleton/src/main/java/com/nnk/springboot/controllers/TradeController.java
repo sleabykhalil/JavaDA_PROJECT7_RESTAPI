@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class TradeController {
     // TO DO: Inject Trade service
@@ -32,14 +34,20 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addUser(Trade trade) {
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+        // TO DO: check data valid and save to db, after saving return Trade list
+        if (!result.hasErrors()) {
+            trade = tradeService.add(trade);
+            log.info("Trade added  id=[{}]", trade.getTradeId());
+        } else {
+            log.error("trade can not be added Account=[{}]", trade.getAccount());
+        }
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")

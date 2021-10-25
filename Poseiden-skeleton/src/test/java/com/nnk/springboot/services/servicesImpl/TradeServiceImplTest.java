@@ -39,4 +39,16 @@ class TradeServiceImplTest {
         //then
         assertThat(result.size()).isGreaterThan(0);
     }
+
+    @Test
+    void add() {
+        //given
+        Trade trade = new Trade("Trade Account", "Type");
+        trade.setTradeId(1);
+        //when
+        when(tradeRepositoryMock.save(trade)).thenReturn(trade);
+        Trade result = tradeServiceUnderTest.add(trade);
+        //then
+        assertThat(result.getTradeId()).isEqualTo(1);
+    }
 }
