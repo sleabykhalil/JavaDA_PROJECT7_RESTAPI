@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
@@ -24,6 +25,7 @@ public class Trade {
     String account;
     @NotBlank(message = "Type is mandatory")
     String type;
+    @NotNull(message = "buyQuantity is mandatory")
     Double buyQuantity;
     Double sellQuantity;
     Double buyPrice;
@@ -47,7 +49,8 @@ public class Trade {
 
     public Trade(String account, String type) {
         this.account=account;
-        this.type=type;
+        this.type = type;
+        this.buyQuantity = 0.0;
     }
 
     public Integer getTradeId() {
