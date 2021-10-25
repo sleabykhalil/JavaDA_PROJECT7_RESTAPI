@@ -10,4 +10,8 @@ public interface TradeService {
     List<Trade> findAll();
 
     Trade add(Trade trade);
+
+    Trade findById(Integer tradeId);
+
+    Trade update(Trade trade);
 }
