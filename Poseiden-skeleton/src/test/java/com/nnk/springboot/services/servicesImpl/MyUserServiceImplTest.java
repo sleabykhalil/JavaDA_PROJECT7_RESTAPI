@@ -12,10 +12,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class MyUserServiceImplTest {
@@ -74,5 +76,17 @@ class MyUserServiceImplTest {
         MyUser result = myUserServiceUnderTest.update(myUser);
         //then
         assertThat(result.getId()).isEqualTo(myUser.getId());
+    }
+
+    @Test
+    void delete() {
+        //given
+        MyUser myUser = new MyUser(1, "userTest", "Password", "FullName", "Role_admin");
+        when(myUserRepositoryMock.findById(1)).thenReturn(Optional.of(myUser));
+        doNothing().when(myUserRepositoryMock).deleteById(1);
+        //when
+        myUserServiceUnderTest.delete(1);
+        //then
+        verify(myUserRepositoryMock, times(1)).deleteById(1);
     }
 }

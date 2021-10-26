@@ -54,5 +54,15 @@ public class MyUserServiceImpl implements MyUserService {
         log.debug("User updated id=[{}]", userToUpdate.getId());
         return userToUpdate;
     }
+
+    @Override
+    public void delete(Integer id) {
+        if (myUserRepository.findById(id).isPresent()) {
+            myUserRepository.deleteById(id);
+            log.debug("User deleted id=[{}]", id);
+        } else {
+            log.debug("User not found =[{}]", id);
+        }
+    }
 }
 

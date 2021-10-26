@@ -17,4 +17,6 @@ public interface MyUserService {
     MyUser findById(Integer id);
 
     MyUser update(MyUser user);
+
+    void delete(Integer id);
 }
