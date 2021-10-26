@@ -51,7 +51,7 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        MyUser user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        MyUser user = myUserService.findById(id);
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
@@ -66,9 +66,9 @@ public class UserController {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
+        //user.setId(id);
+        myUserService.update(user);
+        //model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
     }
 

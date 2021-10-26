@@ -13,4 +13,8 @@ public interface MyUserService {
     List<MyUser> findAll();
 
     MyUser add(MyUser user);
+
+    MyUser findById(Integer id);
+
+    MyUser update(MyUser user);
 }

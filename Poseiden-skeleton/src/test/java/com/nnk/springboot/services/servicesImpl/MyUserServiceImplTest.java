@@ -64,4 +64,15 @@ class MyUserServiceImplTest {
         //then
         assertThat(result.getId()).isEqualTo(myUser.getId());
     }
+
+    @Test
+    void update() {
+        //given
+        MyUser myUser = new MyUser(1, "userTest", "Password", "FullName", "Role_admin");
+        when(myUserRepositoryMock.save(myUser)).thenReturn(myUser);
+        //when
+        MyUser result = myUserServiceUnderTest.update(myUser);
+        //then
+        assertThat(result.getId()).isEqualTo(myUser.getId());
+    }
 }

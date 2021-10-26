@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -34,6 +35,24 @@ public class MyUserServiceImpl implements MyUserService {
         MyUser myUserToAdd = myUserRepository.save(user);
         log.debug("User added id=[{}] ", user.getId());
         return myUserToAdd;
+    }
+
+    @Override
+    public MyUser findById(Integer id) {
+        Optional<MyUser> myUser = myUserRepository.findById(id);
+        if (myUser.isPresent()) {
+            log.debug("User found id=[{}]", id);
+            return myUser.get();
+        }
+        log.debug("User not found id=[{}]", id);
+        return null;
+    }
+
+    @Override
+    public MyUser update(MyUser user) {
+        MyUser userToUpdate = myUserRepository.save(user);
+        log.debug("User updated id=[{}]", userToUpdate.getId());
+        return userToUpdate;
     }
 }
 
