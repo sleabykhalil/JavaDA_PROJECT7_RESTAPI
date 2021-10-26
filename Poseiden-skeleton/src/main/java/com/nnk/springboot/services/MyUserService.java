@@ -11,4 +11,6 @@ public interface MyUserService {
     MyUser findUserByUsername(String username);
 
     List<MyUser> findAll();
+
+    MyUser add(MyUser user);
 }

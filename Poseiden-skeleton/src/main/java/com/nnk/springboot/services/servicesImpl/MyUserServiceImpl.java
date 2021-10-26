@@ -28,5 +28,12 @@ public class MyUserServiceImpl implements MyUserService {
     public List<MyUser> findAll() {
         return myUserRepository.findAll();
     }
+
+    @Override
+    public MyUser add(MyUser user) {
+        MyUser myUserToAdd = myUserRepository.save(user);
+        log.debug("User added id=[{}] ", user.getId());
+        return myUserToAdd;
+    }
 }
 
