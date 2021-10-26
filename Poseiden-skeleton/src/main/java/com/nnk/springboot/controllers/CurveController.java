@@ -36,14 +36,15 @@ public class CurveController {
     @PostMapping(value = "/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         // done TO DO: check data valid and save to db, after saving return Curve list
-
         if (!result.hasErrors()) {
             curvePointService.add(curvePoint);
             log.info("CurvePoint added Curve id=[{}]", curvePoint.getCurveId());
+            return "redirect:/curvePoint/list";
         } else {
             log.error("CurvePoint can not be added id=[{}]", curvePoint.getCurveId());
+            return "curvePoint/add";
         }
-        return "redirect:/curvePoint/list";
+
     }
 
     @GetMapping("/curvePoint/update/{id}")
@@ -61,10 +62,11 @@ public class CurveController {
         if (!result.hasErrors()) {
             curvePointService.update(curvePoint);
             log.info("CurvePoint updated Curve id=[{}]", id);
+            return "redirect:/curvePoint/list";
         } else {
             log.error("CurvePoint can not be update id=[{}]", id);
+            return "curvePoint/update";
         }
-        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")

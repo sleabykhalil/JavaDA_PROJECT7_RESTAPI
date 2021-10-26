@@ -44,10 +44,11 @@ public class TradeController {
         if (!result.hasErrors()) {
             trade = tradeService.add(trade);
             log.info("Trade added  id=[{}]", trade.getTradeId());
+            return "redirect:/trade/list";
         } else {
             log.error("trade can not be added Account=[{}]", trade.getAccount());
+            return "trade/add";
         }
-        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
@@ -65,10 +66,11 @@ public class TradeController {
         if (!result.hasErrors()) {
             tradeService.update(trade);
             log.info("Trade updated  id=[{}]", id);
+            return "redirect:/trade/list";
         } else {
             log.error("Trade can not be update id=[{}]", id);
+            return "trade/update";
         }
-        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")

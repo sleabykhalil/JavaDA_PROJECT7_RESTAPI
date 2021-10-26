@@ -40,10 +40,11 @@ public class RatingController {
         if (!result.hasErrors()) {
             ratingService.add(rating);
             log.info("Rating added  id=[{}]", rating.getId());
+            return "redirect:/rating/list";
         } else {
             log.error("Rating can not be added id=[{}]", rating.getId());
+            return "rating/add";
         }
-        return  "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
@@ -61,10 +62,11 @@ public class RatingController {
         if (!result.hasErrors()) {
             ratingService.update(rating);
             log.info("Rating updated  id=[{}]", id);
+            return "redirect:/rating/list";
         } else {
             log.error("Rating can not be update id=[{}]", id);
+            return "rating/update";
         }
-        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/delete/{id}")
