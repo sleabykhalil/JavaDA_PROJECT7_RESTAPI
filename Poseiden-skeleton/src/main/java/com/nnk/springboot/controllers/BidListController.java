@@ -46,10 +46,11 @@ public class BidListController {
         if (!result.hasErrors()) {
             bidListService.add(bid);
             log.info("bid added id=[{}]", bid.getBidListId());
+            return "redirect:/bidList/list";
         } else {
             log.error("bid can not be added id=[{}]", bid.getBidListId());
+            return "bidlist/add";
         }
-        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -67,10 +68,11 @@ public class BidListController {
         if (!result.hasErrors()) {
             bidListService.update(id, bidList);
             log.info("bid updated Id=[{}]", bidList.getBidListId());
+            return "redirect:/bidList/list";
         } else {
             log.error("bid can not be updated Id=[{}]", bidList.getBidListId());
+            return "bidList/update";
         }
-        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
