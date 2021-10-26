@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.MyUser;
 import com.nnk.springboot.repositories.MyUserRepository;
+import com.nnk.springboot.services.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,16 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
-    private MyUserRepository userRepository;
+    MyUserService myUserService;
+    //private MyUserRepository userRepository;
+    @Autowired
+    MyUserRepository userRepository;
 
-    @RolesAllowed("ADMIN")
+    // @RolesAllowed("ADMIN")
     @RequestMapping("/user/list")
     public String home(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        List<MyUser> users = myUserService.findAll();
+        model.addAttribute("users", users);
         return "user/list";
     }
 
