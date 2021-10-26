@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.MyUser;
 import com.nnk.springboot.repositories.MyUserRepository;
+import com.nnk.springboot.services.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,16 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
-    private MyUserRepository userRepository;
+    MyUserService myUserService;
+    //private MyUserRepository userRepository;
+    @Autowired
+    MyUserRepository userRepository;
 
-    @RolesAllowed("ADMIN")
+    // @RolesAllowed("ADMIN")
     @RequestMapping("/user/list")
     public String home(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        List<MyUser> users = myUserService.findAll();
+        model.addAttribute("users", users);
         return "user/list";
     }
 
@@ -37,8 +43,7 @@ public class UserController {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);//fixme use service insteadof repository
-            model.addAttribute("users", userRepository.findAll());
+            myUserService.add(user);
             return "redirect:/user/list";
         }
         return "user/add";
@@ -46,7 +51,7 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        MyUser user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        MyUser user = myUserService.findById(id);
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
@@ -61,17 +66,15 @@ public class UserController {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
+        //user.setId(id);
+        myUserService.update(user);
+        //model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
     }
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        MyUser user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
-        model.addAttribute("users", userRepository.findAll());
+        myUserService.delete(id);
         return "redirect:/user/list";
     }
 }
