@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @AllArgsConstructor
@@ -20,6 +22,10 @@ public class MyUser {
     @NotBlank(message = "Username is mandatory")
     private String username;
     @NotBlank(message = "Password is mandatory")
+    @Size(min = 8, message = "minimum 8 character mandatory")
+    @Pattern(regexp = "[A-Z]+", message = "minimum one character in Capital latter ")
+    @Pattern(regexp = "[0-9]+", message = "minimum one digit ")
+    @Pattern(regexp = "[&%$#@!~]+", message = "minimum one special character")
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;

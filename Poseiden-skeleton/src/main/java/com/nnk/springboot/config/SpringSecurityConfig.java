@@ -40,10 +40,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rating/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/ruleName/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/trade/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/update").hasAnyAuthority( "USER","ADMIN")
-                .antMatchers("/user/list").hasAnyAuthority( "USER","ADMIN")//fixme remove user
+                .antMatchers("/user/update").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/user/list").hasAnyAuthority("USER", "ADMIN")//fixme remove user
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/add").permitAll()
+                .antMatchers("/user/validate").permitAll()
                 .antMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
