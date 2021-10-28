@@ -1,8 +1,6 @@
 package com.nnk.springboot.services.servicesImpl;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.dto.BidListDto;
-import com.nnk.springboot.domain.dto.mapper.BidListMapper;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.services.BidListService;
 import lombok.AllArgsConstructor;
@@ -19,8 +17,6 @@ import java.util.Optional;
 public class BidListServiceImpl implements BidListService {
     @Autowired
     BidListRepository bidListRepository;
-    @Autowired
-    BidListMapper bidListMapper;
 
     @Override
     public List<BidList> findAllBids() {
@@ -29,16 +25,11 @@ public class BidListServiceImpl implements BidListService {
 
     @Override
     public BidList add(BidList bidList) {
-        return bidListRepository.save(bidList);
+        BidList bidListToAdd = bidListRepository.save(bidList);
+        log.debug("Bid added id=[{}]", bidListToAdd.getBidListId());
+        return bidListToAdd;
     }
 
-    @Override
-    public BidList update(Integer bidListId, BidList bidList) {
-        BidListDto bidListDto = bidListMapper.bidListToBidListDte(bidList);
-        bidListDto.setBidListId(bidListId);
-        BidList bidListToSave = bidListMapper.bidListDteToBidList(bidListDto);
-        return bidListRepository.save(bidListToSave);
-    }
 
     @Override
     public BidList findBidListById(Integer bidListId) {
@@ -52,10 +43,18 @@ public class BidListServiceImpl implements BidListService {
     }
 
     @Override
-    public void delete(BidList bidListToDelete) {
-        bidListRepository.delete(bidListToDelete);
-        log.info("bid deleted id=[{}]" , bidListToDelete.getBidListId());
+    public BidList update(BidList bidList) {
+        BidList bidListToUpdate = bidListRepository.save(bidList);
+        log.debug("Bid updated id=[{}]", bidListToUpdate.getBidListId());
+        return bidListToUpdate;
     }
 
-
+    @Override
+    public void delete(Integer bidListId) {
+        if (bidListRepository.findById(bidListId).isPresent()) {
+            bidListRepository.deleteById(bidListId);
+            log.debug("Bid deleted id=[{}]", bidListId);
+        }
+        log.debug("bid not  found id=[{}]", bidListId);
+    }
 }

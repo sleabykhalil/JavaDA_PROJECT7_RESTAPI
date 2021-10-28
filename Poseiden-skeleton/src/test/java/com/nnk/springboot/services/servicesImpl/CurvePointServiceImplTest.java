@@ -1,7 +1,9 @@
 package com.nnk.springboot.services.servicesImpl;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.CurvePointRepository;
+import com.nnk.springboot.services.BidListService;
 import com.nnk.springboot.services.CurvePointService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
