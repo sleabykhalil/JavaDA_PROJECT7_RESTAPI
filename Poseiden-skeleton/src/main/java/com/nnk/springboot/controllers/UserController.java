@@ -34,16 +34,16 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(MyUser bid) {
+    public String addUser(MyUser myUser) {
         return "user/add";
     }
 
     @PostMapping("/user/validate")
-    public String validate(@Valid MyUser user, BindingResult result, Model model) {
+    public String validate(@Valid MyUser myUser, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            myUserService.add(user);
+            myUser.setPassword(encoder.encode(myUser.getPassword()));
+            myUserService.add(myUser);
             return "redirect:/user/list";
         }
         return "user/add";
