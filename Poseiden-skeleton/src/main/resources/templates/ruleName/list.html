@@ -43,16 +43,16 @@
 			<tbody>
 			<!-- TO DO: Show all RuleName to the table, the Action column will have Edit & Delete buttons -->
 			<tr class="text-center" th:each="ruleName : ${ruleNameList}">
-				<td th:text="${ruleName.id}">id</td>
-				<td th:text="${ruleName.name}">Name</td>
-				<td th:text="${ruleName.description}">Description</td>
-				<td th:text="${ruleName.json}">json</td>
-				<td th:text="${ruleName.template}">template</td>
-				<td th:text="${ruleName.sqlStr}">sqlStr</td>
-				<td th:text="${ruleName.sqlPart}">sqlPart</td>
-				<td><a th:href="@{/ruleName/update/{id}(id=${rating.id})}" role="button">Edit</a> |
-					<a th:href="@{/ruleName/delete/{id}(id=${rating.id})}" role="button">Delete</a></td>
-			</tr>
+                <td th:text="${ruleName.id}">id</td>
+                <td th:text="${ruleName.name}">Name</td>
+                <td th:text="${ruleName.description}">Description</td>
+                <td th:text="${ruleName.json}">json</td>
+                <td th:text="${ruleName.template}">template</td>
+                <td th:text="${ruleName.sqlStr}">sqlStr</td>
+                <td th:text="${ruleName.sqlPart}">sqlPart</td>
+                <td><a th:href="@{/ruleName/update/{id}(id=${ruleName.id})}" role="button">Edit</a> |
+                    <a th:href="@{/ruleName/delete/{id}(id=${ruleName.id})}" role="button">Delete</a></td>
+            </tr>
 			</tbody>
 		</table>
 	</div>

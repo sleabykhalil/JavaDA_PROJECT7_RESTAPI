@@ -34,8 +34,8 @@ class MyUserServiceImplTest {
     @Test
     void findUserByUsername() {
         //given
-        MyUser myUser = new MyUser();
-        myUser.setUsername("test");
+        Optional<MyUser> myUser = Optional.of(new MyUser());
+        myUser.get().setUsername("test");
         when(myUserRepositoryMock.findByUsername(anyString())).thenReturn(myUser);
         //when
         MyUser result = myUserServiceUnderTest.findUserByUsername("username");
