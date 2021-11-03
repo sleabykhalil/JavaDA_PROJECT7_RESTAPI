@@ -11,9 +11,9 @@ public interface BidListService {
 
     BidList add(BidList bidList);
 
-    BidList update(Integer bidListId,BidList bidList);
+    BidList update(BidList bidList);
 
     BidList findBidListById(Integer bidListId);
 
-    void delete(BidList bidListToDelete);
+    void delete(Integer bidListId);
 }

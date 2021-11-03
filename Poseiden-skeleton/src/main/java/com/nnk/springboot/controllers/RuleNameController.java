@@ -41,7 +41,7 @@ public class RuleNameController {
         if (!result.hasErrors()) {
             ruleNameService.add(ruleName);
             log.info("RuleName added  id=[{}]", ruleName.getId());
-            return "redirect:ruleName/list";
+            return "redirect:/ruleName/list";
         } else {
             log.error("RuleName can not be added id=[{}]", ruleName.getName());
             return "ruleName/add";

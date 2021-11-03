@@ -20,9 +20,12 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Override
     public MyUser findUserByUsername(String username) {
-        MyUser myUser = myUserRepository.findByUsername(username);
-        log.info("user found =[{}]", myUser.getUsername());
-        return myUser;
+        Optional<MyUser> myUser = myUserRepository.findByUsername(username);
+        if (myUser.isPresent()) {
+            log.info("user found =[{}]", myUser.get().getUsername());
+            return myUser.get();
+        }
+        return null;
     }
 
     @Override

@@ -68,8 +68,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe();
-
-
     }
 
 

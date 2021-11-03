@@ -1,9 +1,6 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.MyUser;
-import com.nnk.springboot.domain.dto.MyUserDto;
-import com.nnk.springboot.domain.dto.mapper.MyUserMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,8 +21,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private MyUserService myUserService;
-    @Autowired
-    MyUserMapper myUserMapper;
 
     /**
      * Lode user from DB
@@ -38,21 +33,20 @@ public class MyUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         MyUser myUser = myUserService.findUserByUsername(username);
-        MyUserDto myUserDto = myUserMapper.myUserToMyUserDte(myUser);
-        Set<String> roleSet = getUserRoles(myUserDto);
+        Set<String> roleSet = getUserRoles(myUser);
         List<GrantedAuthority> authorities = getUserAuthority(roleSet);
-        UserDetails userDetails = buildClientForAuthentication(myUserDto, authorities);
+        UserDetails userDetails = buildClientForAuthentication(myUser, authorities);
         return userDetails;
     }
 
-    private Set<String> getUserRoles(MyUserDto myUserDto) {
-        Set<String> roleSet=new HashSet<>();
-        roleSet.add(myUserDto.getRole());
+    private Set<String> getUserRoles(MyUser myUser) {
+        Set<String> roleSet = new HashSet<>();
+        roleSet.add(myUser.getRole());
         return roleSet;
     }
 
-    private UserDetails buildClientForAuthentication(MyUserDto myUserDto, List<GrantedAuthority> authorities) {
-        User user = new User(myUserDto.getUsername(), myUserDto.getPassword(), authorities);
+    private UserDetails buildClientForAuthentication(MyUser myUser, List<GrantedAuthority> authorities) {
+        User user = new User(myUser.getUsername(), myUser.getPassword(), authorities);
         return user;
     }
 

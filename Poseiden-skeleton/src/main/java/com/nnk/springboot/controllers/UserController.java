@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,10 @@ public class UserController {
 
     @PostMapping("/user/validate")
     public String validate(@Valid MyUser myUser, BindingResult result, Model model) {
+        if (myUserService.findUserByUsername(myUser.getUsername()) != null) {
+            ObjectError error = new ObjectError("globalError", "User " + myUser.getUsername() + " exist pales change user name");
+            result.addError(error);
+        }
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             myUser.setPassword(encoder.encode(myUser.getPassword()));

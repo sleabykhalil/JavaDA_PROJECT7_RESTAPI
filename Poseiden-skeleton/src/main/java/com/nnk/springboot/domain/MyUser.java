@@ -16,17 +16,19 @@ import javax.validation.constraints.Size;
 @Table(name = "Users")
 public class MyUser {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
+
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "minimum 8 character mandatory")
-    @Pattern(regexp = "[A-Z]+", message = "minimum one character in Capital latter ")
-    @Pattern(regexp = "[0-9]+", message = "minimum one digit ")
-    @Pattern(regexp = "[&%$#@!~]+", message = "minimum one special character")
+    @Pattern(regexp = "^(?=\\P{Ll}*\\p{Ll})(?=\\P{Lu}*\\p{Lu})(?=\\P{N}*\\p{N})(?=[\\p{L}\\p{N}]*[^\\p{L}\\p{N}])[\\s\\S]{8,}$"
+            , message = " password must contain: capital latter and small latter and digit and special character")
+
     private String password;
+
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
     @NotBlank(message = "Role is mandatory")
