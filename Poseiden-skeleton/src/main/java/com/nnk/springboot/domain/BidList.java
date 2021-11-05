@@ -49,9 +49,9 @@ public class BidList { //fixme ask Mandfred if i had to change name to Bid
     String side;
 
     public BidList(String accountTest, String typeTest, double bidQuantity) {
-        this.account=accountTest;
-        this.type=typeTest;
-        this.bidQuantity=bidQuantity;
+        this.account = accountTest;
+        this.type = typeTest;
+        this.bidQuantity = bidQuantity;
     }
 
     public Integer getBidListId() {

@@ -48,7 +48,7 @@ public class Trade {
     String side;
 
     public Trade(String account, String type) {
-        this.account=account;
+        this.account = account;
         this.type = type;
         this.buyQuantity = 0.0;
     }
