@@ -5,3 +5,5 @@
 *.iws
 *.iml
 *.ipr
+### log folder ###
+/mylog/

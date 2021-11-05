@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @Slf4j
 @Controller
 public class RatingController {
@@ -25,7 +26,7 @@ public class RatingController {
     public String home(Model model) {
         // TO DO: find all Rating, add to model
         List<Rating> ratingList = ratingService.findAllRating();
-        model.addAttribute("ratingList",ratingList);
+        model.addAttribute("ratingList", ratingList);
         return "rating/list";
     }
 
