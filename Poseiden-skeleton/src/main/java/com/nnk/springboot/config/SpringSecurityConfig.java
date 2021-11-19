@@ -35,13 +35,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/bidList/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/curvePoint/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/rating/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/ruleName/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/trade/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/update").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/list").hasAnyAuthority("USER", "ADMIN")//fixme remove user
+                .antMatchers("/bidList/**").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/curvePoint/**").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/rating/**").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/ruleName/**").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/user/update").hasAnyAuthority("ROLE_USER", "ADMIN")
+                .antMatchers("/user/list").hasAnyAuthority("ROLE_USER", "ADMIN")//fixme remove user
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/user/validate").permitAll()
@@ -62,6 +62,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
                 .and().exceptionHandling().accessDeniedPage("/app/error")
+                .and().oauth2Login()
                 .and()
                 .csrf().disable()
                 .logout()
