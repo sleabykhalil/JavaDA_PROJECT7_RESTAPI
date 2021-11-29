@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
+import com.nnk.springboot.services.MyUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -19,10 +21,14 @@ public class CurveController {
     @Autowired
     CurvePointService curvePointService;
 
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
 
     @GetMapping("/curvePoint/list")
-    public String getCurvePoint(Model model) {
+    public String getCurvePoint(Model model, Principal user) {
         // done TO DO: find all Curve Point, add to model
+        String userInfo = myUserDetailsService.getUserInfo(user);
+        model.addAttribute("loggedUser", userInfo);
         List<CurvePoint> curvePointList = curvePointService.findAllCurvePoint();
         model.addAttribute("curvePointList", curvePointList);
         return "curvePoint/list";
