@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.services.MyUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -21,9 +23,14 @@ public class BidListController {
     @Autowired
     BidListService bidListService;
 
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
     @GetMapping("/bidList/list")
-    public String getBidList(Model model) {
+    public String getBidList(Model model, Principal user) {
         // TO DO: call service find all bids to show to the view
+        String userInfo = myUserDetailsService.getUserInfo(user);
+        model.addAttribute("loggedUser", userInfo);
         List<BidList> bidLists = bidListService.findAllBids();
         model.addAttribute("bidLists", bidLists);
         return "bidList/list";
