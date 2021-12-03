@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.services.MyUserDetailsService;
 import com.nnk.springboot.services.RuleNameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -22,9 +24,14 @@ public class RuleNameController {
     @Autowired
     RuleNameService ruleNameService;
 
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
     @RequestMapping("/ruleName/list")
-    public String home(Model model) {
+    public String home(Model model, Principal user) {
         // TO DO: find all RuleName, add to model
+        String userInfo = myUserDetailsService.getUserInfo(user);
+        model.addAttribute("loggedUser", userInfo);
         List<RuleName> ruleNameList = ruleNameService.findAllRuleName();
         model.addAttribute("ruleNameList", ruleNameList);
         return "ruleName/list";

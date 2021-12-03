@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.services.MyUserDetailsService;
 import com.nnk.springboot.services.TradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +25,14 @@ public class TradeController {
     @Autowired
     TradeService tradeService;
 
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
 
     @RequestMapping("/trade/list")
-    public String home(Model model) {
+    public String home(Model model, Principal user) {
         // TO DO: find all Trade, add to model
+        String userInfo = myUserDetailsService.getUserInfo(user);
+        model.addAttribute("loggedUser", userInfo);
         List<Trade> tradeList = new ArrayList<>();
         tradeList = tradeService.findAll();
         model.addAttribute("tradeList", tradeList);
