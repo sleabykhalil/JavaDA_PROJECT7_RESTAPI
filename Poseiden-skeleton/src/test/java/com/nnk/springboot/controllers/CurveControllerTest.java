@@ -20,6 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser(username = "user"
+        , password = "123456")
 class CurveControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -28,9 +30,6 @@ class CurveControllerTest {
     CurvePointRepository curvePointRepository;
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void getCurvePoint() throws Exception {
         mockMvc.perform(get("/curvePoint/list"))
                 .andDo(print())
@@ -38,9 +37,6 @@ class CurveControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void addCurvePointForm() throws Exception {
         mockMvc.perform(get("/curvePoint/add"))
                 .andDo(print())
@@ -48,17 +44,16 @@ class CurveControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void validateCurvePoint() throws Exception {
-
+        CurvePoint curvePoint = curvePointRepository.save(new CurvePoint(10, 10d, 30d));
+        mockMvc.perform(post("/curvePoint/validate")
+                        .flashAttr("curvePoint", curvePoint))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/curvePoint/list"));
     }
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void showCurvePointUpdateForm() throws Exception {
         CurvePoint curvePoint = curvePointRepository.save(new CurvePoint(10, 10d, 30d));
         mockMvc.perform(get("/curvePoint/update/{id}", curvePoint.getId().toString()))
@@ -67,9 +62,6 @@ class CurveControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void updateCurvePoint() throws Exception {
         CurvePoint curvePoint = curvePointRepository.save(new CurvePoint(10, 10d, 30d));
         CurvePoint newCurvePoint = curvePointRepository.save(new CurvePoint(100, 10d, 30d));
@@ -81,9 +73,6 @@ class CurveControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user"
-            , password = "123456"
-            , roles = {"USER"})
     void deleteCurvePoint() throws Exception {
         CurvePoint curvePoint = curvePointRepository.save(new CurvePoint(10, 10d, 30d));
         mockMvc.perform(get("/curvePoint/delete/{id}", curvePoint.getCurveId().toString()))
