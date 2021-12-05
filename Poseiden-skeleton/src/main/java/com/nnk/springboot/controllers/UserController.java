@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class UserController {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             myUser.setPassword(encoder.encode(myUser.getPassword()));
             myUserService.add(myUser);
-            return "redirect:/user/list";
+            return "redirect:/";
         }
         return "user/add";
     }
@@ -58,7 +57,7 @@ public class UserController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         MyUser user = myUserService.findById(id);
         user.setPassword("");
-        model.addAttribute("user", user);
+        model.addAttribute("myUser", user);
         return "user/update";
     }
 
@@ -80,6 +79,11 @@ public class UserController {
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         myUserService.delete(id);
+        return "redirect:/user/list";
+    }
+
+    @GetMapping("/secure/article-details")
+    public String getAllUserArticles(Model model) {
         return "redirect:/user/list";
     }
 }
