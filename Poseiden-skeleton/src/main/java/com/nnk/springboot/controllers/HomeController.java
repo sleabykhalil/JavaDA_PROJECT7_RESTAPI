@@ -17,5 +17,13 @@ public class HomeController {
         return "redirect:/bidList/list";
     }
 
+    @GetMapping("/error")
+    public String error(Model model) {
+        //ModelAndView mav = new ModelAndView();
+        String errorMessage = "You are not authorized for the requested data.";
+        model.addAttribute("errorMsg", errorMessage);
+        //mav.setViewName("app/403");
+        return "redirect:app/403";
+    }
 
 }

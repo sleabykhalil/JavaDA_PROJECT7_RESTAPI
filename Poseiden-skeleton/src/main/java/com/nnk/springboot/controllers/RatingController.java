@@ -28,7 +28,7 @@ public class RatingController {
     MyUserDetailsService myUserDetailsService;
 
     @RequestMapping("/rating/list")
-    public String home(Model model, Principal user) {
+    public String getRatingList(Model model, Principal user) {
         // TO DO: find all Rating, add to model
         String userInfo = myUserDetailsService.getUserInfo(user);
         model.addAttribute("loggedUser", userInfo);

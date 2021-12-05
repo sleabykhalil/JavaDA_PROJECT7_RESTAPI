@@ -44,6 +44,28 @@ class MyUserServiceImplTest {
     }
 
     @Test
+    void findUserById() {
+        //given
+        Optional<MyUser> myUser = Optional.of(new MyUser());
+        myUser.get().setId(1);
+        when(myUserRepositoryMock.findById(1)).thenReturn(myUser);
+        //when
+        MyUser result = myUserServiceUnderTest.findById(1);
+        //then
+        assertThat(result.getId()).isEqualTo(1);
+    }
+
+    @Test
+    void findUserByIdWhenNotFoundReturnNull() {
+        //given
+        when(myUserRepositoryMock.findById(1)).thenReturn(Optional.empty());
+        //when
+        MyUser result = myUserServiceUnderTest.findById(1);
+        //then
+        assertThat(result).isNull();
+    }
+
+    @Test
     void findAll() {
         //given
         MyUser myUser = new MyUser(1, "userTest", "Password", "FullName", "Role_admin");
