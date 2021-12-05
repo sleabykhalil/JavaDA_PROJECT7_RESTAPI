@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <title>Poseidon Inc Log in</title>
+</head>
+<body>
+
+<div class="container justify-content-center">
+
+    <div class="d-flex justify-content-center align-items-center  flex-column"
+         style="    width: 40%;    margin-left: auto;    margin-right: auto;">
+        <div>
+            <form class=" col-sm px-4 py-3 " th:action="@{/app/login}" method="POST">
+                <div class="form-group">
+                    <label for="username">User name</label>
+                    <input type="text" id="username" name="username" class="form-control"
+                           placeholder="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+                    <label class="form-check-label" for="remember-me">
+                        Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+        </div>
+        <div>
+            <a class="btn btn-primary" th:href="@{/oauth2/authorization/github}">Log in with GitHub</a>&nbsp;
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

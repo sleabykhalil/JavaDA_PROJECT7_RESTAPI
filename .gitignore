@@ -1,7 +1,9 @@
 /.idea/
-
+/Poseiden-skeleton/target
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+### log folder ###
+/mylog/
