@@ -27,7 +27,7 @@ public class UserController {
 
     // @RolesAllowed("ADMIN")
     @RequestMapping("/user/list")
-    public String home(Model model) {
+    public String getUserList(Model model) {
         List<MyUser> users = myUserService.findAll();
         model.addAttribute("users", users);
         return "user/list";
