@@ -28,7 +28,7 @@ public class RuleNameController {
     MyUserDetailsService myUserDetailsService;
 
     @RequestMapping("/ruleName/list")
-    public String getRuleName(Model model, Principal user) {
+    public String getRuleNameList(Model model, Principal user) {
         // TO DO: find all RuleName, add to model
         String userInfo = myUserDetailsService.getUserInfo(user);
         model.addAttribute("loggedUser", userInfo);
