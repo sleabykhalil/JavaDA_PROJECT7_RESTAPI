@@ -29,7 +29,7 @@ public class TradeController {
     MyUserDetailsService myUserDetailsService;
 
     @RequestMapping("/trade/list")
-    public String home(Model model, Principal user) {
+    public String getTradeList(Model model, Principal user) {
         // TO DO: find all Trade, add to model
         String userInfo = myUserDetailsService.getUserInfo(user);
         model.addAttribute("loggedUser", userInfo);
@@ -40,7 +40,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade trade) {
+    public String addTrade(Trade trade) {
         return "trade/add";
     }
 
