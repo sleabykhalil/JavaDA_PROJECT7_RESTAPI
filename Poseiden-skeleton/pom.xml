@@ -179,7 +179,7 @@
                     <excludes>
                         <exclude>**/config/**</exclude>
                         <exclude>**/domain/**</exclude>
-                        <exclude>**/repositories/**</exclude>
+                        <exclude>**/logger/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
